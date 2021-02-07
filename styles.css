@@ -1,0 +1,27 @@
+header {
+    text-align: center;
+}
+
+.attributes {
+    text-align: center;
+}
+
+:root {
+    --grid-cols: 1;
+    --grid-rows: 1;
+  }
+
+.gridContainer {
+    display: grid;
+    max-width: 750px;
+    min-height: 750px;
+    margin: 2rem auto;
+    border: 2px solid black;
+}
+
+.gridBlock {
+    padding: 1em;
+    border: 1px solid black;
+    background: azure;
+
+}
