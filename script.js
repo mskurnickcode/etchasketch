@@ -1,6 +1,9 @@
 const grid = document.getElementById('gridContainer')
 const resetButton = document.getElementById('resetButton')
 const active = document.getElementById('active')
+const gridSizeSlider = document.getElementById('gridSize')
+const colorSlider = document.getElementById('colorSlider')
+
 
 
 
@@ -10,10 +13,36 @@ active.addEventListener('click', setPaintingActive)
 
 
 //defaults
-var color = 'black';
+var color = 'hsl(180 , 100%, 50%)';
 var rows = 16;
 var columns = 16;
 var paintingActive = false;
+
+//Change Attributes
+var newGridSize = 0
+var newBoxSize = 1
+
+function resetGridContainer() {
+    document.querySelectorAll('.gridBlock').forEach(e => e.remove());
+}
+
+
+gridSizeSlider.onmouseup = function(){
+    console.log(`Grid Size: ${this.value}`)
+    newGridSize = this.value;
+    resetGridContainer();
+    makeGrid(newGridSize,newGridSize)
+}
+
+colorSlider.onmouseup = function(){
+    var hslcolor = "hsl(" + this.value + ", 100%, 50%)";
+    console.log(`Color Code: ${hslcolor}`)
+    color = hslcolor
+    var RgbColor = hslToHex(this.value, 50, 50)
+    colorSlider.textContent = ".rainbow::-webkit-slider-thumb { background: " + RgbColor + "; }";
+}
+
+
 
 
 
@@ -48,10 +77,10 @@ function setPaintingActive() {
     console.log(paintingActive)
     if (paintingActive == true) {
         paintingActive = false;
-        active.innerHTML = "Inactive"
+        active.innerHTML = "Painting: Inactive"
     } else if (paintingActive == false) {
             paintingActive = true;
-            active.innerHTML = "Active"
+            active.innerHTML = "Painting: Active"
         }
 }
 
@@ -62,3 +91,15 @@ function reset() {
     var cells = grid.querySelectorAll('div');
     cells.forEach(cell => cell.style.backgroundColor = 'azure')
 }
+
+//HSL to RGB Converter
+function hslToHex(h, s, l) {
+    l /= 100;
+    const a = s * Math.min(l, 1 - l) / 100;
+    const f = n => {
+      const k = (n + h / 30) % 12;
+      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+      return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
+  }

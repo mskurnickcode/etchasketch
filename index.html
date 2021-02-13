@@ -6,18 +6,35 @@
     <title>Etch-A-Sketch</title>
 </head>
 <body>
-    <header>Etch-A-Sketch</header>
+    <header>
+        <h2>Etch-A-Sketch</h2>
+    </header>
+    
     <div id="main">
         <div id="attributes">
-            <h4>Painting Active:</h4> <span id="active"> Click on a square to start </span>
-            <button id="resetButton"> Reset </button>
+            <div class="sizersContainer">
+                <div class="gridSizeContainer">
+                    <h4>Grid Size</h4>
+                    <input type="range" min="5" max="25" value="15" class="slider" id="gridSize">
+                </div>
+                <div class="ColorSlider">
+                    <h4>Painting Color</h4>
+                    <input class="rainbow" type="range" min="0" max="360" id="colorSlider"/>
+                </div>
+            </div>
+            <div class="status">
+                <h4 id="active">Set Painting Active: Click on a square to start </h4>
+                <button id="resetButton"> Reset the Grid </button>
+            </div>
         </div>
         <div id="gridContainer" class="gridContainer">
 
 
         </div>
     </div>
-    
+    <footer>
+        <span>Created by MskurnickCode</span>
+    </footer>
 </body>
 <script src="script.js"></script>
 
